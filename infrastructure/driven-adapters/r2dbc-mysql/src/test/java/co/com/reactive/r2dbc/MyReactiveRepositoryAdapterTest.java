@@ -11,8 +11,7 @@ import org.reactivecommons.utils.ObjectMapper;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,21 +26,24 @@ class MyReactiveRepositoryAdapterTest {
     @Mock
     ObjectMapper mapper;
 
-    void saveTest() {
+    @Test
+    void saveCapacityTest() {
         Capacity capacity = new Capacity(1L, "Arquitectura de microservicios", "Capacidad para diseñar e implementar microservicios");
+        CapacityEntity capacityEntity = new CapacityEntity(1L, capacity.getName(), capacity.getDescription());
 
-        CapacityEntity capacityEntity = new CapacityEntity();
-        capacityEntity.setId(1L);
-        capacityEntity.setName(capacity.getName());
-        capacityEntity.setDescription(capacity.getDescription());
-
-        when(repository.save(any(CapacityEntity.class))).thenReturn(Mono.just(capacityEntity));
+        when(mapper.map(capacity, CapacityEntity.class)).thenReturn(capacityEntity);
+        when(repository.save(capacityEntity)).thenReturn(Mono.just(capacityEntity));
+        when(mapper.map(capacityEntity, Capacity.class)).thenReturn(capacity);
 
         Mono<Capacity> result = repositoryAdapter.saveCapacity(capacity);
 
         StepVerifier.create(result)
                 .expectNext(capacity)
                 .verifyComplete();
+
+        verify(mapper).map(capacity, CapacityEntity.class);
+        verify(mapper).map(capacityEntity, Capacity.class);
+        verify(repository).save(capacityEntity);
     }
 
     @Test

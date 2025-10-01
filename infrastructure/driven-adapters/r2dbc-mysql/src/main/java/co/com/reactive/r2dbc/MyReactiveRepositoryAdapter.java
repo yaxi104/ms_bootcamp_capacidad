@@ -29,18 +29,4 @@ public class MyReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         return repository.existsByName(name);
     }
 
-    private CapacityEntity mapDomainToEntity(Capacity capacity) {
-        CapacityEntity capacityEntity = new CapacityEntity();
-        capacityEntity.setName(capacityEntity.getName());
-        capacityEntity.setDescription(capacityEntity.getDescription());
-        return capacityEntity;
-    }
-
-    private Capacity mapEntityToDomain(CapacityEntity capacityEntity) {
-        Capacity capacity = new Capacity();
-        capacity.setId(capacityEntity.getId());
-        capacityEntity.setName(capacityEntity.getName());
-        capacityEntity.setDescription(capacityEntity.getDescription());
-        return capacity;
-    }
 }

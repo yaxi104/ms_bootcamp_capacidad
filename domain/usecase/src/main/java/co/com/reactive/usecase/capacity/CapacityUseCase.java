@@ -30,7 +30,7 @@ public class CapacityUseCase {
                         ValidateRequest.validateCapacityRequest(request)
                                 .then(capacityRepository.existsByName(request.getName())
                                         .flatMap(exists -> {
-                                            if (exists) {
+                                            if (Boolean.TRUE.equals(exists)) {
                                                 return Mono.error(new CapacityAlreadyExistsException());
                                             }
                                             return Mono.just(request);
