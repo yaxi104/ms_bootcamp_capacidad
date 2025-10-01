@@ -13,7 +13,6 @@ import reactor.core.publisher.Mono;
 import static co.com.reactive.api.exception.ExceptionResponse.BAD_REQUEST_MESSAGE;
 import static co.com.reactive.api.exception.ExceptionResponse.CAPACITY_ALREADY_EXISTS;
 
-
 @Component
 @Order(-2)
 public class GlobalErrorHandler implements WebExceptionHandler {
