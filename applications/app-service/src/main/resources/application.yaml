@@ -12,7 +12,7 @@ spring:
   profiles:
     include: null
   r2dbc:
-    url: r2dbc:mysql://localhost:3306/TECNOLOGIA?serverZoneId=America%2FBogota
+    url: r2dbc:mysql://localhost:3306/CAPACIDAD?serverZoneId=America%2FBogota
     username: "root"
     password: "root"
   sql:
@@ -60,3 +60,8 @@ resilience4j:
         slidingWindowSize: 10
         minimumNumberOfCalls: 10
         waitDurationInOpenState: "10s"
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
