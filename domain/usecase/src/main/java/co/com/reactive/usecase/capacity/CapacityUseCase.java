@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_ASC;
 import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_DESC;
@@ -68,7 +69,8 @@ public class CapacityUseCase {
         Set<String> validOrders = Set.of(ORDEN_ASC, ORDEN_DESC);
         Set<String> validSorts = Set.of(ORDEN_NAME, ORDEN_TECHN_COUNT);
 
-        if (!validOrders.contains(order.toLowerCase()) || !validSorts.contains(sortBy.toLowerCase())) {
+        if (!validOrders.stream().map(String::toLowerCase).collect(Collectors.toSet()).contains(order.toLowerCase()) ||
+                !validSorts.stream().map(String::toLowerCase).collect(Collectors.toSet()).contains(sortBy.toLowerCase())) {
             return Mono.error(new BadRequestException());
         }
 

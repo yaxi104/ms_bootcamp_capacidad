@@ -38,13 +38,17 @@ public class MyReactiveRepositoryAdapter extends ReactiveAdapterOperations<
 
     @Override
     public Flux<Capacity> findAllOrderedByNameAsc(PageInfo pageInfo) {
-        return repository.findAllOrderedByNameAsc(pageInfo.getSize(), pageInfo.getPage())
+        int limit = pageInfo.getSize();
+        int offset = pageInfo.getPage() * pageInfo.getSize();
+        return repository.findAllOrderedByNameAsc(limit, offset)
                 .map(entity -> mapper.map(entity, Capacity.class));
     }
 
     @Override
     public Flux<Capacity> findAllOrderedByNameDesc(PageInfo pageInfo) {
-        return repository.findAllOrderedByNameDesc(pageInfo.getSize(), pageInfo.getPage())
+        int limit = pageInfo.getSize();
+        int offset = pageInfo.getPage() * pageInfo.getSize();
+        return repository.findAllOrderedByNameDesc(limit, offset)
                 .map(entity -> mapper.map(entity, Capacity.class));
     }
 }

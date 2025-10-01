@@ -66,7 +66,7 @@ public class RouterRest {
                     summary = "List all capacities with optional sorting and pagination",
                     parameters = {
                             @Parameter(name = "sortBy", description = "Sort by 'name' or 'technologyCount'", example = "name"),
-                            @Parameter(name = "order", description = "Sort order: 'asc' or 'desc'", example = "asc"),
+                            @Parameter(name = "order", description = "Sort order: 'ascendente' or 'descendente'", example = "ascendente"),
                             @Parameter(name = "page", description = "Page number", example = "0"),
                             @Parameter(name = "size", description = "Page size", example = "10")
                     },
