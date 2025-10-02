@@ -4,10 +4,17 @@ import co.com.reactive.model.capacity.CapacityReq;
 import co.com.reactive.model.capacity.CapacityResponse;
 import co.com.reactive.model.capacity.PageResponse;
 import co.com.reactive.usecase.capacity.CapacityUseCase;
+import co.com.reactive.usecase.capacitybootcamp.CapacityBootcampUseCase;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.reactive.function.server.MockServerRequest;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -18,23 +25,34 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class HandlerTest {
+
+    @Mock
+    private CapacityUseCase capacityUseCase;
+
+    @Mock
+    private CapacityBootcampUseCase capacityBootcampUseCase;
+
+    private Handler handler;
+
+    @BeforeEach
+    void setUp() {
+        handler = new Handler(capacityUseCase, capacityBootcampUseCase);
+    }
 
     @Test
     void listenPOSTCapacityUseCaseTest() {
-        CapacityUseCase useCase = mock(CapacityUseCase.class);
-        when(useCase.saveCapacity(any())).thenReturn(Mono.empty());
-
-        Handler handler = new Handler(useCase);
-
         CapacityReq capacityReq = new CapacityReq();
         capacityReq.setName("name");
         capacityReq.setDescription("descripcion");
-        MockServerRequest request = MockServerRequest.builder()
+
+        when(capacityUseCase.saveCapacity(any())).thenReturn(Mono.empty());
+
+        ServerRequest request = MockServerRequest.builder()
                 .method(HttpMethod.POST)
                 .uri(URI.create("/api/v1/capacity"))
                 .header("Content-Type", MediaType.APPLICATION_JSON_VALUE)
@@ -42,17 +60,15 @@ class HandlerTest {
 
         Mono<ServerResponse> responseMono = handler.listenPOSTCapacityUseCase(request);
 
-        ServerResponse response = responseMono.block();
+        StepVerifier.create(responseMono)
+                .assertNext(response -> assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED))
+                .verifyComplete();
 
-        assertThat(response).isNotNull();
-        assertThat(response.statusCode().value()).isEqualTo(201);
+        verify(capacityUseCase).saveCapacity(any());
     }
 
     @Test
     void listenGETCapacityUseCaseTest() {
-        CapacityUseCase useCase = mock(CapacityUseCase.class);
-        Handler handler = new Handler(useCase);
-
         CapacityResponse capacity1 = new CapacityResponse(1L, "Java", "Backend", List.of(), 0);
         CapacityResponse capacity2 = new CapacityResponse(2L, "Python", "Data", List.of(), 0);
 
@@ -63,10 +79,10 @@ class HandlerTest {
                 2L
         );
 
-        when(useCase.findAllCapacityPage(any(), anyString(), anyString()))
+        when(capacityUseCase.findAllCapacityPage(any(), anyString(), anyString()))
                 .thenReturn(Mono.just(pageResponse));
 
-        MockServerRequest request = MockServerRequest.builder()
+        ServerRequest request = MockServerRequest.builder()
                 .method(HttpMethod.GET)
                 .uri(URI.create("/api/v1/capacity?sortBy=name&order=ascendente&page=0&size=5"))
                 .build();
@@ -74,10 +90,9 @@ class HandlerTest {
         Mono<ServerResponse> responseMono = handler.listenGETCapacityUseCase(request);
 
         StepVerifier.create(responseMono)
-                .assertNext(response -> assertThat(response.statusCode().value()).isEqualTo(200))
+                .assertNext(response -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK))
                 .verifyComplete();
 
-        verify(useCase).findAllCapacityPage(any(), anyString(), anyString());
+        verify(capacityUseCase).findAllCapacityPage(any(), anyString(), anyString());
     }
-
 }

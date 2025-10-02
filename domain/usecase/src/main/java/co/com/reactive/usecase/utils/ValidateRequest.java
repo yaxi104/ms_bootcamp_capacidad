@@ -1,13 +1,13 @@
-package co.com.reactive.usecase.capacity.utils;
+package co.com.reactive.usecase.utils;
 
 import co.com.reactive.model.capacity.CapacityReq;
-import co.com.reactive.usecase.capacity.exception.BadRequestException;
+import co.com.reactive.usecase.exception.BadRequestException;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static co.com.reactive.usecase.capacity.utils.Constants.MAX_SIZE_TECHN;
-import static co.com.reactive.usecase.capacity.utils.Constants.MIN_SIZE_TECHN;
+import static co.com.reactive.usecase.utils.Constants.MAX_SIZE_TECHN;
+import static co.com.reactive.usecase.utils.Constants.MIN_SIZE_TECHN;
 
 public class ValidateRequest {
 

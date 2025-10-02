@@ -1,6 +1,7 @@
 package co.com.reactive.api;
 
 import co.com.reactive.model.capacity.CapacityReq;
+import co.com.reactive.model.capacitybootcamp.CapacityBootcampRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -84,6 +85,40 @@ public class RouterRest {
     @Bean
     public RouterFunction<ServerResponse> getCapacitiesRoute(Handler handler) {
         return route(GET("/api/v1/capacity/capacities"), handler::listenGETCapacityUseCase);
+    }
+
+    @RouterOperation(
+            path = "/api/v1/capacity/bootcamp",
+            method = RequestMethod.POST,
+            beanClass = Handler.class,
+            beanMethod = "listenPOSTCapacityBootcampUseCase",
+            operation = @Operation(
+                    operationId = "saveCapacityBootcamp",
+                    summary = "Create a Bootcamp-Capacity relationship",
+                    requestBody = @RequestBody(
+                            required = true,
+                            content = @Content(schema = @Schema(implementation = CapacityBootcampRequest.class))
+                    ),
+                    responses = {
+                            @ApiResponse(responseCode = "201", description = "Relationship created successfully"),
+                            @ApiResponse(responseCode = "400", description = "Invalid request",
+                                    content = @Content(mediaType = "application/json", examples = @ExampleObject(
+                                            name = "Bad Request Example",
+                                            value = "{\"message\": \"The request contains invalid data. Please check the submitted fields and try again.\"}"
+                                    ))
+                            ),
+                            @ApiResponse(responseCode = "409", description = "Conflict - Relationship already exists",
+                                    content = @Content(mediaType = "application/json", examples = @ExampleObject(
+                                            name = "Conflict Example",
+                                            value = "{\"message\": \"A relationship between this bootcamp and capacity already exists.\"}"
+                                    ))
+                            )
+                    }
+            )
+    )
+    @Bean
+    public RouterFunction<ServerResponse> postCapacityBootcampRoute(Handler handler) {
+        return route(POST("/api/v1/capacity/bootcamp"), handler::listenPOSTCapacityBootcampUseCase);
     }
 
 }

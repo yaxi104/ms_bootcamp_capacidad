@@ -1,7 +1,7 @@
 package co.com.reactive.api.exception;
 
-import co.com.reactive.usecase.capacity.exception.BadRequestException;
-import co.com.reactive.usecase.capacity.exception.CapacityAlreadyExistsException;
+import co.com.reactive.usecase.exception.BadRequestException;
+import co.com.reactive.usecase.exception.CapacityAlreadyExistsException;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

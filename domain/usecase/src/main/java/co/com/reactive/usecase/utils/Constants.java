@@ -1,4 +1,4 @@
-package co.com.reactive.usecase.capacity.utils;
+package co.com.reactive.usecase.utils;
 
 public class Constants {
 

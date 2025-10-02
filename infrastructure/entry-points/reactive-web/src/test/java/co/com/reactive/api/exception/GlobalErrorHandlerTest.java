@@ -1,7 +1,7 @@
 package co.com.reactive.api.exception;
 
-import co.com.reactive.usecase.capacity.exception.BadRequestException;
-import co.com.reactive.usecase.capacity.exception.CapacityAlreadyExistsException;
+import co.com.reactive.usecase.exception.BadRequestException;
+import co.com.reactive.usecase.exception.CapacityAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

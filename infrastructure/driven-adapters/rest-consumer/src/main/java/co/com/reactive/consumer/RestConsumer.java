@@ -1,6 +1,5 @@
 package co.com.reactive.consumer;
 
-import co.com.reactive.consumer.config.TechnologyCapacityResponse;
 import co.com.reactive.model.capacity.CapacityTechnology;
 import co.com.reactive.model.capacity.TechnologyResponse;
 import co.com.reactive.model.capacity.gateways.ICapacityTechnologyServiceClient;

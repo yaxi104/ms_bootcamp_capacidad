@@ -3,6 +3,7 @@ package co.com.reactive.api.config;
 import co.com.reactive.api.Handler;
 import co.com.reactive.api.RouterRest;
 import co.com.reactive.usecase.capacity.CapacityUseCase;
+import co.com.reactive.usecase.capacitybootcamp.CapacityBootcampUseCase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,16 @@ class ConfigTest {
             Mockito.when(mockUseCase.saveCapacity(any())).thenReturn(Mono.empty());
             return mockUseCase;
         }
+        @Bean
+        public CapacityBootcampUseCase capacityBootcampUseCase() {
+            CapacityBootcampUseCase mockUseCase = Mockito.mock(CapacityBootcampUseCase.class);
+            Mockito.when(mockUseCase.saveCapacityBootcamp(any())).thenReturn(Mono.empty());
+            return mockUseCase;
+        }
 
         @Bean
-        public Handler handler(CapacityUseCase capacityUseCase) {
-            return new Handler(capacityUseCase);
+        public Handler handler(CapacityUseCase capacityUseCase, CapacityBootcampUseCase capacityBootcampUseCase) {
+            return new Handler(capacityUseCase, capacityBootcampUseCase);
         }
     }
 }

@@ -1,4 +1,4 @@
-package co.com.reactive.consumer.config;
+package co.com.reactive.consumer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

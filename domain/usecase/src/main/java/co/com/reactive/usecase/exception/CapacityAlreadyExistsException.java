@@ -1,5 +1,5 @@
 
-package co.com.reactive.usecase.capacity.exception;
+package co.com.reactive.usecase.exception;
 
 public class CapacityAlreadyExistsException extends RuntimeException {
 

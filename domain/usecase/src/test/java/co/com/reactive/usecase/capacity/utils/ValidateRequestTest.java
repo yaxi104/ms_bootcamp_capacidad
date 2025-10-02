@@ -1,7 +1,9 @@
 package co.com.reactive.usecase.capacity.utils;
 
 import co.com.reactive.model.capacity.CapacityReq;
-import co.com.reactive.usecase.capacity.exception.BadRequestException;
+import co.com.reactive.usecase.exception.BadRequestException;
+import co.com.reactive.usecase.utils.Constants;
+import co.com.reactive.usecase.utils.ValidateRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;

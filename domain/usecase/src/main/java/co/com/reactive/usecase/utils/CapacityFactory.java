@@ -1,4 +1,4 @@
-package co.com.reactive.usecase.capacity.utils;
+package co.com.reactive.usecase.utils;
 
 import co.com.reactive.model.capacity.Capacity;
 import co.com.reactive.model.capacity.CapacityReq;

@@ -1,5 +1,6 @@
 package co.com.reactive.usecase.capacity.utils;
 
+import co.com.reactive.usecase.utils.CapacityFactory;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;

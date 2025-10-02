@@ -9,10 +9,10 @@ import co.com.reactive.model.capacity.PageResponse;
 import co.com.reactive.model.capacity.TechnologyResponse;
 import co.com.reactive.model.capacity.gateways.ICapacityRepository;
 import co.com.reactive.model.capacity.gateways.ICapacityTechnologyServiceClient;
-import co.com.reactive.usecase.capacity.exception.BadRequestException;
-import co.com.reactive.usecase.capacity.exception.CapacityAlreadyExistsException;
-import co.com.reactive.usecase.capacity.utils.CapacityFactory;
-import co.com.reactive.usecase.capacity.utils.ValidateRequest;
+import co.com.reactive.usecase.exception.BadRequestException;
+import co.com.reactive.usecase.exception.CapacityAlreadyExistsException;
+import co.com.reactive.usecase.utils.CapacityFactory;
+import co.com.reactive.usecase.utils.ValidateRequest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_ASC;
-import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_DESC;
-import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_NAME;
-import static co.com.reactive.usecase.capacity.utils.Constants.ORDEN_TECHN_COUNT;
+import static co.com.reactive.usecase.utils.Constants.ORDEN_ASC;
+import static co.com.reactive.usecase.utils.Constants.ORDEN_DESC;
+import static co.com.reactive.usecase.utils.Constants.ORDEN_NAME;
+import static co.com.reactive.usecase.utils.Constants.ORDEN_TECHN_COUNT;
 
 public class CapacityUseCase {
 

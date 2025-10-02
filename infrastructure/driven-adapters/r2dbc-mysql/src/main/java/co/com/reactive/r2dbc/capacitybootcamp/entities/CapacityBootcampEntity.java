@@ -1,4 +1,4 @@
-package co.com.reactive.r2dbc.entities;
+package co.com.reactive.r2dbc.capacitybootcamp.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,20 +8,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "CAPACIDADES")
+@Table(name = "CAPACIDAD_BOOTCAMP")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CapacityEntity {
+public class CapacityBootcampEntity {
 
     @Id
     private Long id;
 
-    @Column("nombre")
-    private String name;
+    @Column("id_capacidad")
+    private Long capacityId;
 
-    @Column("descripcion")
-    private String description;
+    @Column("id_bootcamp")
+    private Long bootcampId;
 
 }

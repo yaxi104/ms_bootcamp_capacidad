@@ -2,7 +2,9 @@ package co.com.reactive.r2dbc;
 
 import co.com.reactive.model.capacity.Capacity;
 import co.com.reactive.model.capacity.PageInfo;
-import co.com.reactive.r2dbc.entities.CapacityEntity;
+import co.com.reactive.r2dbc.capacity.CapacityRepository;
+import co.com.reactive.r2dbc.capacity.CapacityRepositoryAdapter;
+import co.com.reactive.r2dbc.capacity.entities.CapacityEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,10 +22,10 @@ import static org.mockito.Mockito.when;
 class MyReactiveRepositoryAdapterTest {
 
     @InjectMocks
-    MyReactiveRepositoryAdapter repositoryAdapter;
+    CapacityRepositoryAdapter repositoryAdapter;
 
     @Mock
-    MyReactiveRepository repository;
+    CapacityRepository repository;
 
     @Mock
     ObjectMapper mapper;
